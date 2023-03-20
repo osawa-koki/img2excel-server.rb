@@ -11,8 +11,8 @@ const pages = [
   },
   {
     emoji: '💓',
-    path: '/chat/',
-    name: 'Chat',
+    path: '/img2excel/',
+    name: 'img2excel',
   },
 ];
 
