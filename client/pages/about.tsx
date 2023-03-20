@@ -1,5 +1,4 @@
 import React from "react";
-import { ListGroup } from "react-bootstrap";
 import Layout from "../components/Layout";
 
 export default function AboutPage() {
