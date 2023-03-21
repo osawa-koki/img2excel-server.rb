@@ -7,7 +7,8 @@ class Api::Img2excelController < Api::ApiController
 
     # GUIDを生成
     guid = SecureRandom.uuid
-    output_file_path = Rails.root.join('tmp', "#{guid}.xlsx")
+    file_name = "#{guid}.xlsx"
+    output_file_path = Rails.root.join('tmp', file_name)
 
     json = JSON.parse(request.body.read)
     encoded_image = json['image']
@@ -65,6 +66,10 @@ class Api::Img2excelController < Api::ApiController
       end
       p.serialize(output_file_path)
     end
+
+    render json: {
+      path: file_name,
+    }, status: :ok
 
   end
 end
