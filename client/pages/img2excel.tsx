@@ -13,6 +13,7 @@ export default function Img2ExcelPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const [registered, setRegistered] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [id, setId] = useState<string | null>(null);
 
   useEffect(() => {
     canvas = _canvas.current as HTMLCanvasElement;
@@ -51,7 +52,7 @@ export default function Img2ExcelPage() {
     await new Promise(resolve => setTimeout(resolve, setting.small_waitingTime));
     const base64 = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")
     console.log("Base64-encoded image: ", base64);
-    const res = await fetch("/api/img2excel", {
+    const res = await fetch(`${setting.apiPath}/api/img2excel`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -61,8 +62,9 @@ export default function Img2ExcelPage() {
       }),
     });
     const data = await res.json();
-    const uri = data.uri;
-    console.log("URI: ", uri);
+    const id = data.id;
+    setId(id);
+    setLoading(false);
   };
 
   return (
@@ -91,6 +93,12 @@ export default function Img2ExcelPage() {
             <Spinner animation="grow" variant="info" />
             <Spinner animation="grow" variant="light" />
             <Spinner animation="grow" variant="dark" />
+          </div>
+        }
+        {
+          id &&
+          <div className="mt-5">
+            <a href={`${setting.apiPath}/api/img2excel/${id}`} className="btn btn-outline-success d-block m-auto" download>Download</a>
           </div>
         }
       </div>
