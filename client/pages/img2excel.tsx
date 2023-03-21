@@ -10,6 +10,9 @@ let ctx: CanvasRenderingContext2D;
 export default function Img2ExcelPage() {
 
   const _canvas = React.createRef<HTMLCanvasElement>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const [registered, setRegistered] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     canvas = _canvas.current as HTMLCanvasElement;
@@ -17,6 +20,7 @@ export default function Img2ExcelPage() {
   }, [_canvas]);
 
   const FileRegister = (e: React.FormEvent<HTMLInputElement>) => {
+    setError(null);
     if (e.currentTarget.files) {
       const reader = new FileReader();
       reader.onload = () => {
@@ -31,8 +35,10 @@ export default function Img2ExcelPage() {
 
           if (width * height < 128 * 128) {
             ctx.drawImage(img, 0, 0);
+            setRegistered(true);
           } else {
             console.log("Image size is not less than 128x128.");
+            setError("Image size is not less than 128x128.");
           }
         };
       }
@@ -53,7 +59,13 @@ export default function Img2ExcelPage() {
           <Form.Control type="file" accept="image/*" onInput={FileRegister} />
         </Form.Group>
         <canvas ref={_canvas} style={{width: "300px", height: "300px"}} className="mt-3 d-block m-auto border"></canvas>
-        <Button variant="primary" className="mt-3 d-block m-auto" onClick={() => {Img2Excel()}}>Convert</Button>
+        <Button variant="primary" className="mt-3 d-block m-auto" onClick={() => {Img2Excel()}} disabled={registered === false}>Convert</Button>
+        {
+          error &&
+          <Alert variant="danger" className="mt-3">
+            {error}
+          </Alert>
+        }
       </div>
     </Layout>
   );
