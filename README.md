@@ -6,7 +6,7 @@
 
 ```shell
 docker build -t img2excel-server-rb .
-docker run -it -p 8000:8000 --name img2excel-server-rb img2excel-server-rb
+docker run --rm -d -p 8000:8000 --name img2excel-server-rb img2excel-server-rb
 ```
 
 ## 使用している技術
