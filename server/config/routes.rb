@@ -12,6 +12,4 @@ Rails.application.routes.draw do
     put '/user/:id', to: 'user#put'
     delete '/user/:id', to: 'user#delete'
   end
-
-  mount ActionCable.server => '/cable'
 end

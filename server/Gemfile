@@ -47,6 +47,5 @@ group :development do
 end
 
 
-gem "actioncable", "~> 7.0"
 
 gem "rack-cors", "~> 2.0"
