@@ -7,6 +7,8 @@ const setting = {
   apiPath: isProd ? '' : 'http://localhost:8000',
   wsPath: isProd ? null : 'ws://localhost:8000',
   title: '🏚️ img2excel-server.rb 🏚️',
+  waitingTime: 1000,
+  small_waitingTime: 100,
 };
 
 export default setting;

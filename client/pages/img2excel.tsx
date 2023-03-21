@@ -47,8 +47,22 @@ export default function Img2ExcelPage() {
   };
 
   const Img2Excel = async () => {
+    setLoading(true);
+    await new Promise(resolve => setTimeout(resolve, setting.small_waitingTime));
     const base64 = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")
     console.log("Base64-encoded image: ", base64);
+    const res = await fetch("/api/img2excel", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        image: base64,
+      }),
+    });
+    const data = await res.json();
+    const uri = data.uri;
+    console.log("URI: ", uri);
   };
 
   return (
