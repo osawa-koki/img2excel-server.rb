@@ -26,8 +26,7 @@ class Api::Img2excelController < Api::ApiController
     puts "size:#{size}"
 
     if size > 128 * 128
-      puts "Too large image size: #{size}"
-      exit
+      render json: { error: "Too large image size: #{size}" }, status: :unprocessable_entity
     end
 
     # セルの大きさを設定する
