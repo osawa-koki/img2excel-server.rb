@@ -12,5 +12,7 @@ Rails.application.routes.draw do
     post '/user', to: 'user#post'
     put '/user/:id', to: 'user#put'
     delete '/user/:id', to: 'user#delete'
+
+    post '/img2excel', to: 'img2excel#post'
   end
 end
