@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { Button, Alert, Form, Spinner, Table } from 'react-bootstrap';
+import { Button, Alert, Form, Spinner } from 'react-bootstrap';
 import Layout from "../components/Layout";
 import setting from "../setting";
 
