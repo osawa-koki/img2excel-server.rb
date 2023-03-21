@@ -4,8 +4,12 @@ require 'axlsx'
 class Api::Img2excelController < Api::ApiController
   def post
 
+    # GUIDを生成
+    guid = SecureRandom.uuid
+    output_file_path = Rails.root.join('tmp', "#{guid}.xlsx")
+
     # json = JSON.parse(request.body.read)
-    
+
     # # 画像ファイルを読み込む
     # image = Magick::Image.read(image_path).first
 
@@ -60,7 +64,7 @@ class Api::Img2excelController < Api::ApiController
 
       # end
 
-      p.serialize("sample.xlsx")
+      p.serialize(output_file_path)
     end
 
 
