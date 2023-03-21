@@ -47,7 +47,7 @@ export default function Img2ExcelPage() {
   };
 
   const Img2Excel = async () => {
-    const base64 = canvas.toDataURL("image/png");
+    const base64 = canvas.toDataURL("image/png").replace(/^data:image\/(png|jpg);base64,/, "")
     console.log("Base64-encoded image: ", base64);
   };
 
