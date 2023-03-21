@@ -3,11 +3,20 @@ require 'axlsx'
 require 'base64'
 
 class Api::Img2excelController < Api::ApiController
+
+  def get
+
+    id = params[:id]
+
+    send_file Rails.root.join('tmp', "#{id}.xlsx"), type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet', disposition: 'attachment', filename: "img2excel.xlsx"
+
+  end
+
   def post
 
     # GUIDを生成
-    guid = SecureRandom.uuid
-    file_name = "#{guid}.xlsx"
+    id = SecureRandom.uuid
+    file_name = "#{id}.xlsx"
     output_file_path = Rails.root.join('tmp', file_name)
 
     json = JSON.parse(request.body.read)
@@ -68,7 +77,7 @@ class Api::Img2excelController < Api::ApiController
     end
 
     render json: {
-      path: file_name,
+      id: id,
     }, status: :ok
 
   end
