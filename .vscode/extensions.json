@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    "github.copilot",
+    "mhutchie.git-graph",
+    "davidanson.vscode-markdownlint",
+    "shopify.ruby-extensions-pack",
+    "shopify.ruby-lsp",
+    "editorconfig.editorconfig"
+  ]
+}
